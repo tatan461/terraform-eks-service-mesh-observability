@@ -71,26 +71,26 @@ terraform-eks-service-mesh-observability/
    terraform apply -auto-approve
 ```
 3. **Configure local Kubernetes context:**
-```powershell
+```bash
    aws eks update-kubeconfig --region <your-region> --name <your-cluster-name>
 ```
 ## Service Mesh & Validation Workflow
 
 1. **Enable Istio sidecar injection in target namespace:**
-```powershell
+```bash
    kubectl create namespace test-app
    kubectl label namespace test-app istio-injection=enabled --overwrite
 ```  
 2. **Validate mTLS end-to-end connectivity:**
 Run a temporary curl container inside the mesh to test strict mTLS traffic:
-```powershell
+```bash
    kubectl run curl-test -n test-app --image=curlimages/curl -it --rm --restart=Never -- curl -s http://nginx-clean
 ```
 ## Observability (Grafana & Prometheus)
 
 1. Access Grafana Dashboard:
 Forward Grafana service port to inspect mesh metrics and telemetry:
-```powershell
+```bash
    kubectl port-forward svc/grafana 3000:3000 -n istio-system
 ```
 Access Grafana locally at http://localhost:3000.
@@ -99,11 +99,11 @@ Access Grafana locally at http://localhost:3000.
 To avoid unexpected charges in your AWS account, clean up test pods and tear down all Terraform-managed resources:
 
 1. **Remove Kubernetes workloads:**
-```powershell
+```bash
    kubectl delete namespace test-app --ignore-not-found
 ```
 2. **Destroy AWS Infrastructure:**
-```powershell
+```bash
    terraform destroy --auto-approve
 ```
 
