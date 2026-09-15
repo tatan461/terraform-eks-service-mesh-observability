@@ -6,6 +6,8 @@ Infrastructure fully provisioned as code (IaC) with Terraform, deploying an Amaz
 ![Terraform](https://img.shields.io/badge/terraform-%235835CC.svg?style=for-the-badge&logo=terraform&logoColor=white)
 ![Kubernetes](https://img.shields.io/badge/kubernetes-%23326ce5.svg?style=for-the-badge&logo=kubernetes&logoColor=white)
 ![Istio](https://img.shields.io/badge/istio-%23466BB0.svg?style=for-the-badge&logo=istio&logoColor=white)
+![Prometheus](https://img.shields.io/badge/Prometheus-E6522C?style=for-the-badge&logo=prometheus&logoColor=white)
+![Grafana](https://img.shields.io/badge/grafana-%23F46800.svg?style=for-the-badge&logo=grafana&logoColor=white)
 
 ## Architecture
 
@@ -58,29 +60,28 @@ terraform-eks-service-mesh-observability/
 
 ## Deployment
 
-1. Clone the repository:
+1. **Clone the repository:**
 ```powershell
    git clone [https://github.com/tatan461/terraform-eks-service-mesh-observability.git](https://github.com/tatan461/terraform-eks-service-mesh-observability.git)
    cd terraform-eks-service-mesh-observability
 ```
-2. Deploy infrastructure using Terraform:
+2. **Deploy infrastructure using Terraform:**
 ```powershell
-   cd terraform
    terraform init
    terraform apply -auto-approve
 ```
-3. Configure local Kubernetes context:
+3. **Configure local Kubernetes context:**
 ```powershell
    aws eks update-kubeconfig --region <your-region> --name <your-cluster-name>
 ```
 ## Service Mesh & Validation Workflow
 
-1. Enable Istio sidecar injection in target namespace:
+1. **Enable Istio sidecar injection in target namespace:**
 ```powershell
    kubectl create namespace test-app
    kubectl label namespace test-app istio-injection=enabled --overwrite
 ```  
-2. Validate mTLS end-to-end connectivity:
+2. **Validate mTLS end-to-end connectivity:**
 Run a temporary curl container inside the mesh to test strict mTLS traffic:
 ```powershell
    kubectl run curl-test -n test-app --image=curlimages/curl -it --rm --restart=Never -- curl -s http://nginx-clean
@@ -97,11 +98,11 @@ Access Grafana locally at http://localhost:3000.
 ## Teardown & Resource Cleanup
 To avoid unexpected charges in your AWS account, clean up test pods and tear down all Terraform-managed resources:
 
-1. Remove Kubernetes workloads:
+1. **Remove Kubernetes workloads:**
 ```powershell
    kubectl delete namespace test-app --ignore-not-found
 ```
-2. Destroy AWS Infrastructure:
+2. **Destroy AWS Infrastructure:**
 ```powershell
    terraform destroy --auto-approve
 ```
