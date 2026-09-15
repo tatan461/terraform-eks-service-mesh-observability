@@ -61,7 +61,7 @@ terraform-eks-service-mesh-observability/
 ## Deployment
 
 1. **Clone the repository:**
-```powershell
+```bash
    git clone https://github.com/tatan461/terraform-eks-service-mesh-observability.git
    cd terraform-eks-service-mesh-observability
 ```
