@@ -14,14 +14,14 @@ Infrastructure fully provisioned as code (IaC) with Terraform, deploying an Amaz
 ```mermaid
 graph LR
     subgraph AWS Cloud
-        A([Client Traffic]) --> B[Amazon VPC & Subnets]
-        B --> C[Amazon EKS Cluster v1.32]
+        A([Client Traffic]) --> B["Amazon VPC<br/>& Subnets"]
+        B --> C["Amazon EKS<br/>Cluster v1.32"]
     end
 
     subgraph EKS Cluster
         C --> D[Istio Service Mesh]
         D --> E[Microservices mTLS]
-        D --> F[(Prometheus & Grafana Telemetry)]
+        D --> F[("Prometheus & Grafana<br/>Telemetry")]
     end
 ```
 
